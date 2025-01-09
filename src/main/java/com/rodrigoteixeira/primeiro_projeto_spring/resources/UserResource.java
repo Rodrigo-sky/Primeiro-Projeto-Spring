@@ -1,6 +1,6 @@
-package com.rodrigoteixeira.course.resources;
+package com.rodrigoteixeira.primeiro_projeto_spring.resources;
 
-import com.rodrigoteixeira.course.entities.User;
+import com.rodrigoteixeira.primeiro_projeto_spring.entities.User;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;

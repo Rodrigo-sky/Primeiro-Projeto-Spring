@@ -1,4 +1,4 @@
-package com.rodrigoteixeira.course;
+package com.rodrigoteixeira.primeiro_projeto_spring;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;

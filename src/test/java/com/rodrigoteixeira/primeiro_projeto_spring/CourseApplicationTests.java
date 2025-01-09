@@ -1,4 +1,4 @@
-package com.rodrigoteixeira.course;
+package com.rodrigoteixeira.primeiro_projeto_spring;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
