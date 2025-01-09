@@ -10,6 +10,7 @@ import java.io.Serializable;
 @NoArgsConstructor
 @Entity
 @Table(name = "tb_user")
+@Builder
 @Data
 public class User implements Serializable {
 
