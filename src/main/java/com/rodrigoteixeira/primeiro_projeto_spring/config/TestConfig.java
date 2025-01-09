@@ -18,7 +18,7 @@ public class TestConfig implements CommandLineRunner {
 
 
     @Override
-    public void run(String... args) throws Exception {
+    public void run(String... args) {
         User u1 = User.builder().nome("Maria Brown").email("maria@gmail.com").phone("988888888").password("123456").build();
         User u2 = User.builder().nome("Alex Green").email("alex@gmail.com").phone("977777777").password("123456").build();
 
