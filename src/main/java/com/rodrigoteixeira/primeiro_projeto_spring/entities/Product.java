@@ -21,10 +21,10 @@ import java.util.Set;
 @AllArgsConstructor
 @NoArgsConstructor
 @Entity
-@Table(name = "tb_category")
+@Table(name = "tb_product")
 @Builder
 @Data
-public class Category implements Serializable {
+public class Product implements Serializable {
 
     @Serial
     private static final long serialVersionUID = 1L;
@@ -33,8 +33,13 @@ public class Category implements Serializable {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private String name;
+    private String description;
+    private Double price;
+    private String imgUrl;
+
 
     @Transient
     @Setter(AccessLevel.NONE)
-    private Set<Product> products = new HashSet<>();
+    private Set<Category> categories = new HashSet<>();
+
 }
