@@ -1,17 +1,16 @@
 package com.rodrigoteixeira.primeiro_projeto_spring.entities;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.ManyToMany;
 import jakarta.persistence.Table;
-import jakarta.persistence.Transient;
-import lombok.AccessLevel;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import lombok.Setter;
 
 import java.io.Serial;
 import java.io.Serializable;
@@ -34,7 +33,8 @@ public class Category implements Serializable {
     private Long id;
     private String name;
 
-    @Transient
-    @Setter(AccessLevel.NONE)
+    @ManyToMany(mappedBy = "categories")
+    @JsonBackReference
+    @Builder.Default
     private Set<Product> products = new HashSet<>();
 }

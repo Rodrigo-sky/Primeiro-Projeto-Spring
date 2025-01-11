@@ -1,17 +1,18 @@
 package com.rodrigoteixeira.primeiro_projeto_spring.entities;
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.JoinTable;
+import jakarta.persistence.ManyToMany;
 import jakarta.persistence.Table;
-import jakarta.persistence.Transient;
-import lombok.AccessLevel;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import lombok.Setter;
 
 import java.io.Serial;
 import java.io.Serializable;
@@ -38,8 +39,10 @@ public class Product implements Serializable {
     private String imgUrl;
 
 
-    @Transient
-    @Setter(AccessLevel.NONE)
+    @ManyToMany
+    @JoinTable(name = "tb_product_category", joinColumns = @JoinColumn(name = "product_id"), inverseJoinColumns = @JoinColumn(name = "category_id"))
+    @JsonManagedReference
+    @Builder.Default
     private Set<Category> categories = new HashSet<>();
 
 }
