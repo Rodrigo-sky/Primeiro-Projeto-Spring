@@ -2,11 +2,13 @@ package com.rodrigoteixeira.primeiro_projeto_spring.config;
 
 import com.rodrigoteixeira.primeiro_projeto_spring.entities.Category;
 import com.rodrigoteixeira.primeiro_projeto_spring.entities.Order;
+import com.rodrigoteixeira.primeiro_projeto_spring.entities.OrderItem;
 import com.rodrigoteixeira.primeiro_projeto_spring.entities.Product;
 import com.rodrigoteixeira.primeiro_projeto_spring.entities.User;
 import com.rodrigoteixeira.primeiro_projeto_spring.entities.enums.OrderStatus;
 import com.rodrigoteixeira.primeiro_projeto_spring.repositories.CategoryRepository;
 import com.rodrigoteixeira.primeiro_projeto_spring.repositories.OrderRepository;
+import com.rodrigoteixeira.primeiro_projeto_spring.repositories.OrderitemRepository;
 import com.rodrigoteixeira.primeiro_projeto_spring.repositories.ProductRepository;
 import com.rodrigoteixeira.primeiro_projeto_spring.repositories.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -32,6 +34,9 @@ public class TestConfig implements CommandLineRunner {
 
     @Autowired
     private ProductRepository productRepository;
+
+    @Autowired
+    private OrderitemRepository orderitemRepository;
 
 
     @Override
@@ -68,5 +73,12 @@ public class TestConfig implements CommandLineRunner {
 
         userRepository.saveAll(Arrays.asList(u1,u2));
         orderRepository.saveAll(Arrays.asList(o1,o2,o3));
+
+        OrderItem oi1 = new OrderItem(o1, p1, 2, p1.getPrice());
+        OrderItem oi2 = new OrderItem(o1, p3, 1, p3.getPrice());
+        OrderItem oi3 = new OrderItem(o2, p3, 2, p3.getPrice());
+        OrderItem oi4 = new OrderItem(o3, p5, 2, p5.getPrice());
+
+        orderitemRepository.saveAll(Arrays.asList(oi1, oi2, oi3, oi4));
     }
 }
