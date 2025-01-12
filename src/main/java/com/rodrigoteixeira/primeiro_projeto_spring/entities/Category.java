@@ -1,28 +1,25 @@
 package com.rodrigoteixeira.primeiro_projeto_spring.entities;
 
-import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.ManyToMany;
 import jakarta.persistence.Table;
-import lombok.AllArgsConstructor;
-import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import java.io.Serial;
 import java.io.Serializable;
 import java.util.HashSet;
+import java.util.Objects;
 import java.util.Set;
 
-@AllArgsConstructor
-@NoArgsConstructor
-@Entity
-@Table(name = "tb_category")
-@Builder
 @Data
+@Entity
+@NoArgsConstructor
+@Table(name = "tb_category")
 public class Category implements Serializable {
 
     @Serial
@@ -34,7 +31,16 @@ public class Category implements Serializable {
     private String name;
 
     @ManyToMany(mappedBy = "categories")
-    @JsonBackReference
-    @Builder.Default
+    @JsonIgnore
     private Set<Product> products = new HashSet<>();
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(id, name);
+    }
+
+    public Category(Long id, String name) {
+        this.id = id;
+        this.name = name;
+    }
 }

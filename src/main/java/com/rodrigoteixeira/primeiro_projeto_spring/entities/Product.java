@@ -1,6 +1,5 @@
 package com.rodrigoteixeira.primeiro_projeto_spring.entities;
 
-import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -9,8 +8,6 @@ import jakarta.persistence.JoinColumn;
 import jakarta.persistence.JoinTable;
 import jakarta.persistence.ManyToMany;
 import jakarta.persistence.Table;
-import lombok.AllArgsConstructor;
-import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
@@ -19,12 +16,10 @@ import java.io.Serializable;
 import java.util.HashSet;
 import java.util.Set;
 
-@AllArgsConstructor
-@NoArgsConstructor
-@Entity
-@Table(name = "tb_product")
-@Builder
 @Data
+@Entity
+@NoArgsConstructor
+@Table(name = "tb_product")
 public class Product implements Serializable {
 
     @Serial
@@ -41,8 +36,13 @@ public class Product implements Serializable {
 
     @ManyToMany
     @JoinTable(name = "tb_product_category", joinColumns = @JoinColumn(name = "product_id"), inverseJoinColumns = @JoinColumn(name = "category_id"))
-    @JsonManagedReference
-    @Builder.Default
     private Set<Category> categories = new HashSet<>();
 
+    public Product(Long id, String name, String description, Double price, String imgUrl) {
+        this.id = id;
+        this.name = name;
+        this.description = description;
+        this.price = price;
+        this.imgUrl = imgUrl;
+    }
 }
