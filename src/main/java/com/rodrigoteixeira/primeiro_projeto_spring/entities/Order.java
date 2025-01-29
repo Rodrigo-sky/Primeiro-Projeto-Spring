@@ -49,7 +49,7 @@ public class Order implements Serializable {
 
     @Getter
     @OneToMany(mappedBy = "id.order")
-    private Set<OrderItem> orderItems = new HashSet<>();
+    private Set<OrderItem> items = new HashSet<>();
 
     public OrderStatus getOrderStatus() {
         return OrderStatus.valueOf(orderStatus);
