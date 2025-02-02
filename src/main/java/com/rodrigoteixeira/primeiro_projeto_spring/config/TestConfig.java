@@ -3,6 +3,7 @@ package com.rodrigoteixeira.primeiro_projeto_spring.config;
 import com.rodrigoteixeira.primeiro_projeto_spring.entities.Category;
 import com.rodrigoteixeira.primeiro_projeto_spring.entities.Order;
 import com.rodrigoteixeira.primeiro_projeto_spring.entities.OrderItem;
+import com.rodrigoteixeira.primeiro_projeto_spring.entities.Payment;
 import com.rodrigoteixeira.primeiro_projeto_spring.entities.Product;
 import com.rodrigoteixeira.primeiro_projeto_spring.entities.User;
 import com.rodrigoteixeira.primeiro_projeto_spring.entities.enums.OrderStatus;
@@ -80,5 +81,10 @@ public class TestConfig implements CommandLineRunner {
         OrderItem oi4 = new OrderItem(o3, p5, 2, p5.getPrice());
 
         orderitemRepository.saveAll(Arrays.asList(oi1, oi2, oi3, oi4));
+
+        Payment pay1 = new Payment(null, Instant.parse("2019-06-20T21:53:07Z"), o1);
+        o1.setPayment(pay1);
+
+        orderRepository.save(o1);
     }
 }
