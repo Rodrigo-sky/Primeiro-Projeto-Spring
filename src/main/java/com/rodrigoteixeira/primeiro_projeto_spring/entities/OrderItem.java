@@ -11,6 +11,7 @@ import lombok.NoArgsConstructor;
 
 import java.io.Serial;
 import java.io.Serializable;
+import java.util.Objects;
 
 @Data
 @Entity
@@ -46,5 +47,14 @@ public class OrderItem  implements Serializable {
     }
     public void setProduct(Product product) {
         id.setProduct(product);
+    }
+
+    public Double getSubTotal() {
+        return price * quantity;
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hashCode(id);
     }
 }

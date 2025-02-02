@@ -74,6 +74,10 @@ public class Order implements Serializable {
         this.client = client;
     }
 
+    public Double getTotal(){
+        return items.stream().mapToDouble(OrderItem::getSubTotal).sum();
+    }
+
     @Override
     public int hashCode() {
         return Objects.hashCode(id);
