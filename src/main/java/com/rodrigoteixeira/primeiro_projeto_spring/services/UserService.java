@@ -2,8 +2,10 @@ package com.rodrigoteixeira.primeiro_projeto_spring.services;
 
 import com.rodrigoteixeira.primeiro_projeto_spring.entities.User;
 import com.rodrigoteixeira.primeiro_projeto_spring.repositories.UserRepository;
+import com.rodrigoteixeira.primeiro_projeto_spring.services.exceptions.DatabaseException;
 import com.rodrigoteixeira.primeiro_projeto_spring.services.exceptions.ResourceNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -19,7 +21,7 @@ public class UserService {
         return userRepository.findAll();
     }
 
-    public User findById(long id) {
+    public User findById(Long id) {
         Optional<User> user = userRepository.findById(id);
 
         return user.orElseThrow(() -> new ResourceNotFoundException(id));
@@ -29,14 +31,22 @@ public class UserService {
         return userRepository.save(obj);
     }
 
-    public void delete(long id) {
-        userRepository.deleteById(id);
+    public void delete(Long id) {
+        if (!userRepository.existsById(id)) {
+            throw new ResourceNotFoundException(id);
+        }
+
+        try {
+            userRepository.deleteById(id);
+        } catch (DataIntegrityViolationException e) {
+            throw new DatabaseException(e.getMessage());
+        }
     }
 
-    public User update(Long id, User obj) {
+    public void update(Long id, User obj) {
         User entity = userRepository.getReferenceById(id);
         updateData(entity, obj);
-        return userRepository.save(entity);
+        userRepository.save(entity);
     }
 
     private void updateData(User entity, User obj) {
